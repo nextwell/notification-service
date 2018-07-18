@@ -11,7 +11,6 @@ const User = mongoose.model('Users');
 module.exports.create = (data) => {
 	let user = new User({
 		endpoint: data.endpoint,
-		expirationTime: data.expirationTime,
 		p256dh: data.p256dh,
 		auth: data.auth,
 		createdAt: new Date()
@@ -25,6 +24,23 @@ module.exports.create = (data) => {
 // Get all users
 
 module.exports.get = (settings) => {
-	// settings can be empty - get all users
-	return Users.find(settings);
+	switch(settings.action){
+		case 'empty': {
+			return Users.find({});
+			break;
+		};
+		case 'full': {
+			let data = settings.data;
+			return Users.findOne({ endpoint: data.endpoint, p256dh: data.p256dh, auth: data.auth });
+			break;
+		};
+		default: {
+			return Users.find({});
+			break;
+		}
+	}
+}
+
+module.exports.remove = (settings) => {
+	return Users.findOneAndRemove(settings);
 }

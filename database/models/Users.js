@@ -3,7 +3,7 @@ let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	endpoint: { type: String},
+	endpoint: { type: String, unique: true},
 	expirationTime: { type: String },
 	p256dh: { type: String },
 	auth: { type: String },
