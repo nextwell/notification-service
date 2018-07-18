@@ -4,6 +4,15 @@ head
 	meta(charset="UTF-8")
 	title Notification Admin Panel
 body
-	h3 Пользователей: #{nUsers}
-	h4 Отправлено: #{nView}
+	h3 Пользователей в системе: #{nUsers}
+	form(method="POST")
+		input(type="text" value="Заголовок уведомления" name="title")
+		br
+		input(type="text" value="Содержание уведомления" name="body")
+		br
+		input(type="text" value="Ссылка на картинку" name="imgsrc")
+		br
+		input(type="text" value="Ссылка на оффер" name="offer")
+		br
+		button(type="submit") Отправить!
 	

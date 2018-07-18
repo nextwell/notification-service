@@ -12,7 +12,7 @@ module.exports = (app, db) => {
 	  		console.log(data);
 	  	})
 	  	.catch( err => {
-	  		console.log('err');
+	  		console.log('ERROR || User already created');
 	  	})
 	  res.status(201).json({});
 
