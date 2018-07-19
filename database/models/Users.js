@@ -7,6 +7,10 @@ const UserSchema = new Schema({
 	expirationTime: { type: String },
 	p256dh: { type: String },
 	auth: { type: String },
+	lang: { type: String },
+	ip: { type: String },
+	country: { type: String },
+	countryCode: { type: String },
 	createdAt: { type: Date }
 });
 

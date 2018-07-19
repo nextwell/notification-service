@@ -22,6 +22,8 @@
     "mongoose": "^5.2.4",
     "path": "^0.12.7",
     "pug": "^2.0.3",
+    "request": "^2.87.0",
+    "request-ip": "^2.1.1",
     "require-fu": "^1.0.0",
     "web-push": "^3.3.2"
   }

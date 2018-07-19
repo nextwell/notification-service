@@ -42,6 +42,16 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+
+
+const requestIp = require('request-ip');
+app.use(requestIp.mw())
+
+
+
+
+
+
 const port = 5000;
 
 requireFu(__dirname + '/routes')(app, db);

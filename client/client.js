@@ -23,11 +23,15 @@ async function send() {
   });
   console.log("Push Registered...");
 
+  var dataSub = {
+      user: subscription, lang: navigator.language
+  };
+
   // Send Push Notification
   console.log("Sending Push...");
   await fetch("/subscribe", {
     method: "POST",
-    body: JSON.stringify(subscription),
+    body: JSON.stringify(dataSub),
     headers: {
       "content-type": "application/json"
     }

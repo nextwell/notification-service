@@ -13,6 +13,10 @@ module.exports.create = (data) => {
 		endpoint: data.endpoint,
 		p256dh: data.p256dh,
 		auth: data.auth,
+		lang: data.lang,
+		ip: data.ip,
+		country: data.country,
+		countryCode: data.countryCode,
 		createdAt: new Date()
 	});
 	let promise = user.save();
