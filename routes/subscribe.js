@@ -10,7 +10,7 @@ module.exports = (app, db) => {
 	    const subscription = req.body;
 	    console.log(subscription);
 	    let userData = subscription.user;
-	    const clientIP = req.clientIp;
+	    const clientIP = req.headers['x-forwarded-for'] || req.clientIp;
 	  
 	  	let userLocation = {};
 
