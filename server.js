@@ -3,7 +3,8 @@ let express    = require("express"),
 	bodyParser = require("body-parser"),
 	path 	   = require("path"),
     requireFu  = require('require-fu'),
-    pug 	   = require('pug');
+    pug 	   = require('pug'),
+    session    = require('express-session');
 
 
 
@@ -32,6 +33,14 @@ db.setUpConnection();
 // Express Settings
 
 const app = express();
+
+let sessionMiddleware = session({
+    secret: "skey",
+    resave: true,
+    saveUninitialized: true
+});
+
+app.use(sessionMiddleware);
 
 app.set('view engine', 'pug');
 
