@@ -33,6 +33,11 @@ module.exports.get = (settings) => {
 			return Users.find({});
 			break;
 		};
+		case 'params': {
+			let data = settings.data;
+			return Users.find(data);
+			break;
+		};
 		case 'full': {
 			let data = settings.data;
 			return Users.findOne({ endpoint: data.endpoint, p256dh: data.p256dh, auth: data.auth });
@@ -45,6 +50,21 @@ module.exports.get = (settings) => {
 	}
 }
 
+//----------------------------------------------------------------------------------------
+// Remove user
+
 module.exports.remove = (settings) => {
 	return Users.findOneAndRemove(settings);
+}
+
+module.exports.GetCountryCode = () => {
+	return Users.distinct('countryCode');
+}
+
+module.exports.GetCountry = () => {
+	return Users.distinct('country');
+}
+
+module.exports.GetLang = () => {
+	return Users.distinct('lang');
 }

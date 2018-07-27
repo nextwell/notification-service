@@ -7,9 +7,6 @@ let request = require('request');
 module.exports = (app, db) => {
 	app.get("/test/users", (req, res) => {
 
-	  
-	    
-
 
 	    db.Users.get({ action: 'empty' })
 	    	.then(data => {
