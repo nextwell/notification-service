@@ -1,8 +1,5 @@
 //----------------------------------------------------------------------------------------
-// Subscribe action
-
-let request = require('request');
-
+// GEO API
 
 module.exports = (app, db) => {
 	app.get("/adm/api/geo", (req, res) => {

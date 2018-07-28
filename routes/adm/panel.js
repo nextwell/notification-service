@@ -34,7 +34,7 @@ module.exports = (app, db) => {
 						    });
 						nView++;*/
 					});
-					res.render('main', { nUsers: data.length });
+					res.render('adm', { nUsers: data.length });
 					
 				})
 		}
@@ -47,9 +47,17 @@ module.exports = (app, db) => {
 	app.post('/adm/panel', (req, res) => {
 		if ( req.session.userData ){
 			let formData = req.body;
-			db.Users.get({action: 'empty'})
+			console.log(formData);
+			let query = {};
+			if ( formData.countries != 'all'){
+				query.countryCode = formData.countries;
+			}
+			if ( formData.langs != 'all'){
+				query.lang = formData.langs; 
+			}
+			db.Users.get({action: 'params', data: query})
 				.then(data => {
-					let nView = 0;	// Колво отправленных пушей без ошибок
+					let nView = 0;	// Кол-во отправленных пушей без ошибок
 					data.forEach(function(item, i, arr) {
 					  	let subscription = { 
 					  		endpoint: item.endpoint,
@@ -62,7 +70,8 @@ module.exports = (app, db) => {
 						const payload = JSON.stringify({ 
 							title: formData.title, 
 							body: formData.body, 
-							icon: formData.imgsrc, 
+							icon: formData.iconsrc,
+							image: formData.imgsrc,  
 							link: formData.offer 
 						});
 						webpush
@@ -79,8 +88,12 @@ module.exports = (app, db) => {
 						    });
 						nView++;
 					});
+					console.log(nView);
+					db.Users.get({action: 'empty'})
+						.then(users => {
+							res.render('adm', { nUsers: users.length, sendedN: nView });
+						})
 					
-					res.render('main', { nUsers: data.length });
 					
 				})
 		}

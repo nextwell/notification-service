@@ -1,4 +1,8 @@
 module.exports = (app, db) => {
+	let admin = {
+		login: 'adm' || process.env.login,
+		password: 'admpanel' || process.env.password
+	}
 	app.get('/adm/login', (req, res) => {
 		if ( req.session.userData ){
 			res.redirect('/adm/panel');
@@ -21,7 +25,7 @@ module.exports = (app, db) => {
 			password: req.body.password
 		};
 		
-		if ( data.login == 'adm' && data.password == 'admpanel' ){
+		if ( data.login == admin.login && data.password == admin.password ){
 			req.session.userData = data;
 			res.redirect('/adm/panel');
 		}

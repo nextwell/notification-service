@@ -12,8 +12,8 @@ let express    = require("express"),
 //----------------------------------------------------------------------------------------
 // Web Push Settings
 
-const publicVapidKey = "BJ7dGWBlWRm4t3rQ3dcac0nNkDZqy1AHp00HTckcPNYyypDz4cuVmDe81KwdrQ6B7BPVuFMuigMR7wy6jc2haBE";
-const privateVapidKey = "e9gTDXqj8Meu6IA1pqnpC3eb2vWw0QbEohct_oGxNoU";
+const publicVapidKey =  process.env.publicVapidKey || "BJ7dGWBlWRm4t3rQ3dcac0nNkDZqy1AHp00HTckcPNYyypDz4cuVmDe81KwdrQ6B7BPVuFMuigMR7wy6jc2haBE";
+const privateVapidKey = process.env.privateVapidKey || "e9gTDXqj8Meu6IA1pqnpC3eb2vWw0QbEohct_oGxNoU";
 
 webpush.setVapidDetails(
   "mailto:niko-west@mail.ru",
