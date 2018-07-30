@@ -1,7 +1,14 @@
 //----------------------------------------------------------------------------------------
 // Subscribe action
 
-let request = require('request');
+let request = require('request'),
+	fs      = require('fs');
+
+//----------------------------------------------------------------------------------------
+// Option config
+
+let fileContents = fs.readFileSync('settings.json','utf8');
+let config = JSON.parse(fileContents);
 
 
 module.exports = (app, db) => {
@@ -33,10 +40,21 @@ module.exports = (app, db) => {
 		    	lang: subscription.lang, 
 		    	ip: clientIP,
 		    	country: userLocation.country,
-		    	countryCode: userLocation.countryCode
+		    	countryCode: userLocation.countryCode,
+		    	click_id: subscription.click_id
 		    })
 	  	    .then( data => {
 	  		    console.log(data);
+
+	  		    // Постбэк реквест в трекер
+	  		    let reqURL = config.POSTBACK;
+	  		    reqURL = reqURL.replace(new RegExp("{{click_id}}",'g'), data.click_id);
+	  		    request(reqURL, (error, response, body) => {
+	  		    	if ( error ){
+	  		    		console.log(error);
+	  		    	}
+	  		    })
+
 	  	    })
 	  	    .catch( err => {
 	  		    console.log('ERROR || User already created');

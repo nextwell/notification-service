@@ -17,6 +17,7 @@ module.exports.create = (data) => {
 		ip: data.ip,
 		country: data.country,
 		countryCode: data.countryCode,
+		click_id: data.click_id,
 		createdAt: new Date()
 	});
 	let promise = user.save();

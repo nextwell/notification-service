@@ -22,13 +22,15 @@
 		<div class="middle">
 			<div class="container">
 				<p class="centered-text">Пользователей в системе: <b>#{nUsers}</b></p>
-				if sendedN
-							<p class="centered success"> Отправлено пользователям: #{sendedN} <p>
+				if status
+							<p class="centered success"> Отправлено! <p>
+				if postbackStatus
+							<p class="centered success"> Настройка постбэка сохранена! <p>
 			</div>
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-8">
-						<form method="POST">
+						<form method="POST" style="margin-bottom: 20px;">
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="email">Заголовок уведомления</label>
 								<input name="title" type="text" class="form-control" id="email" placeholder="Заголовок уведомления" autofocus>
@@ -47,7 +49,8 @@
 							</div>
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="password">Ссылка на оффер</label>
-								<input name="offer" type="text" class="form-control" id="password" placeholder="Ссылка на оффер" autofocus>
+								<input name="offer" type="text" class="form-control" id="password" placeholder="https://google.com/?click_id={{click_id}}" autofocus>
+								<small class="form-text text-muted">Токен может быть любым, {{click_id}} заменяется автоматически на нужное значение.</small>
 							</div>
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="password">Страна</label>
@@ -63,6 +66,16 @@
 							</div>
 							<div class="form-group centered-text">
 								<button type="submit" class="btn btn-success">Отправить</button>
+							</div>
+						</form>
+						<form action="/adm/api/postback" method="POST">
+							<div class="form-group centered-text">
+								<label class="form-control-label" for="email">Ссылка на postback трекера</label>
+								<input name="postback" type="text" class="form-control" placeholder="#{postback}">
+								<small class="form-text text-muted">Токен может быть любым, {{click_id}} заменяется автоматически на нужное значение.</small>
+							</div>
+							<div class="form-group centered-text">
+								<button type="submit" class="btn btn-primary">Сохранить настройку</button>
 							</div>
 						</form>
 					</div>

@@ -10,6 +10,7 @@ const UserSchema = new Schema({
 	lang: { type: String },
 	ip: { type: String },
 	country: { type: String },
+	click_id: { type: String },
 	countryCode: { type: String },
 	createdAt: { type: Date }
 });

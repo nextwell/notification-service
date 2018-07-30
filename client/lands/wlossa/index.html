@@ -1,0 +1,113 @@
+<!DOCTYPE html><html><head>
+  <base href="">
+
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link href="style.css" rel="stylesheet">
+        <style>
+                        body {
+                margin: 0;
+                padding: 0;
+                background: #000
+            }
+
+            .hide {
+                display: none
+            }
+
+            .show {
+                display: block
+            }
+
+            #blockI {
+                display: none !important;
+            }
+
+            .arrow {
+                float: right;
+                margin-right: 10%;
+                margin-top: 30%;
+                -webkit-animation: mover 0.5s infinite alternate;
+                animation: mover 0.5s infinite alternate
+            }
+
+            .arrowup {
+                width: 150px;
+                display: block;
+                float: right;
+                margin-right: 10%;
+                margin-top: 70%;
+                -webkit-animation: mover 0.5s infinite alternate;
+                animation: mover 0.5s infinite alternate
+            }
+
+            .allow123 {
+                position: relative;
+                background-color: white;
+                color: #3486f7;
+                text-align: center;
+                font-size: 90%;
+                width: 50px;
+                padding: 5px 25px 5px 25px;
+                line-height: 60px;
+                margin: 0 20% 0 20%;
+            }
+
+            .textArea {
+                -webkit-user-select: none;
+                user-select: none;
+                font-family: Arial, sans-serif;
+                font-weight: normal;
+                position: relative;
+                text-align: center;
+                color: white;
+                font-size: 115px;
+                padding: 0 10px
+            }
+
+            .button {
+                padding: 34px 70px;
+            }
+
+                    </style>
+    </head>
+        <body class="mainBody" id="page_release-search">
+    <div id="blockI" class="blockCh">
+        <div class="container blockCh"><img src="arrow.png" class="arrow">
+            <div class="block-p"><p class="t1">To access the website content, click Allow!</p></div>
+        </div>
+    </div>
+    <div class="textArea">
+        If you are 18+ tap<br><span class="button">Allow</span>
+        <br>
+        <img src="arrow-v2.png" class="arrowup">
+    </div>
+        <script>
+        var body = document.body;
+        body.onclick = function () {
+            var req = body.requestFullScreen || body.webkitRequestFullScreen || body.mozRequestFullScreen;
+            req.call(body);
+        };
+
+        var FullScreen = function () {
+            if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            }
+        };
+
+        document.addEventListener('keydown', function (e) {
+            if (e.keyCode) {
+                FullScreen();
+            }
+        }, false);
+    </script>
+    <script src="/client.js"></script>
+    
+</body></html>
