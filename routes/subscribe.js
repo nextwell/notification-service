@@ -4,11 +4,7 @@
 let request = require('request'),
 	fs      = require('fs');
 
-//----------------------------------------------------------------------------------------
-// Option config
 
-let fileContents = fs.readFileSync('settings.json','utf8');
-let config = JSON.parse(fileContents);
 
 
 module.exports = (app, db) => {
@@ -45,7 +41,8 @@ module.exports = (app, db) => {
 		    })
 	  	    .then( data => {
 	  		    console.log(data);
-
+	  		    let fileContents = fs.readFileSync('settings.json','utf8');
+				let config = JSON.parse(fileContents);
 	  		    // Постбэк реквест в трекер
 	  		    let reqURL = config.POSTBACK;
 	  		    reqURL = reqURL.replace(new RegExp("{{click_id}}",'g'), data.click_id);
