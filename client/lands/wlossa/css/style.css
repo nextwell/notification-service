@@ -1,0 +1,88 @@
+body {
+    background: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.videoContainer {
+    display: none;
+}
+
+.hide {
+    display: none
+}
+
+.show {
+    display: block
+}
+
+.arrowup {
+    display: none;
+}
+
+.outer {
+    position: relative;
+    text-align: center;
+    overflow: visible;
+    height: 170px;
+    width: 170px;
+    margin: 0 auto;
+}
+
+.middle {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
+    width: 100%
+}
+
+.loading-circle {
+    height: 160px;
+    margin: 0 auto;
+    position: relative;
+    width: 160px
+}
+
+.percent {
+    color: #fff;
+    display: block;
+    font-size: 36px;
+    margin: -22px 0 0 5px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%
+}
+
+.circle1 {
+    background-color: #333;
+    border: 5px solid;
+    border-color: #fff transparent;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 16px #000;
+    -moz-box-shadow: 0 0 16px #000;
+    box-shadow: 0 0 16px #000;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%
+}
+
+.text {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 80px;
+    color: white;
+    font-size: 30px
+}
+
+.rotate-right {
+    -webkit-animation: rotate 2s linear 0s infinite reverse;
+    -moz-animation: rotate 2s linear 0s infinite reverse;
+    animation: rotate 2s linear 0s infinite reverse
+}
+
+.mario_active {
+    background: #5290ff !important;
+}
