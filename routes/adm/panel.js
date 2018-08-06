@@ -22,7 +22,7 @@ module.exports = (app, db) => {
 		
 
 	})
-	app.post('/adm/panel', (req, res) => {
+	app.post('/adm/panel', async (req, res) => {
 		if ( req.session.userData ){
 			let formData = req.body;
 			console.log(formData);
@@ -33,6 +33,21 @@ module.exports = (app, db) => {
 			if ( formData.langs != 'all'){
 				query.lang = formData.langs; 
 			}
+			let adv_id = 'none';
+  		    await db.Adv.create({ 
+		    	title: formData.title, 
+		    	body: formData.body,
+		    	icon: formData.iconsrc,
+		    	image: formData.imgsrc,
+		    	offer: formData.offer,
+		    	country: formData.countries,
+		    	lang: formData.langs
+		    })
+		   	.then(data => {
+		   		adv_id = data._id
+		   		console.log(data);
+		   	})
+
 			db.Users.get({action: 'params', data: query})
 				.then(data => {
 					data.forEach(function(item, i, arr) {
@@ -47,12 +62,14 @@ module.exports = (app, db) => {
 						// Постбэк реквест в трекер
 			  		    let reqURL = formData.offer;
 			  		    reqURL = reqURL.replace(new RegExp("{{click_id}}",'g'), item.click_id);
+
 						const payload = JSON.stringify({ 
 							title: formData.title, 
 							body: formData.body, 
 							icon: formData.iconsrc,
 							image: formData.imgsrc,  
-							link: reqURL 
+							link: reqURL,
+							adv_id: adv_id
 						});
 						webpush
 						    .sendNotification(subscription, payload)

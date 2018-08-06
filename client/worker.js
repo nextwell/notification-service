@@ -7,9 +7,13 @@ self.addEventListener("push", e => {
   self.registration.showNotification(data.title, {
     body: data.body,
     icon: data.icon,
-    data: data.link,
+    data: { 
+      link: data.link,
+      adv_id: data.adv_id },
     image: data.image
   });
+
+  fetch(`/api/views/add/${data.adv_id}`)
 
 });
 
@@ -19,8 +23,9 @@ self.addEventListener('notificationclick', function(event) {
 
   event.notification.close();
 
+  fetch(`/api/clicks/add/${event.notification.data.adv_id}`)
   event.waitUntil(
-    clients.openWindow(event.notification.data)
+    clients.openWindow(event.notification.data.link)
   );
 });
 
