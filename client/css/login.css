@@ -85,3 +85,12 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .success{
 	color: green;
 }
+
+.centered-image{
+	margin: 0 auto;
+}
+
+.modelimg{
+	max-width: 100%;
+	max-height: 100%;
+}

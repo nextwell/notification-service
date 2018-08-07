@@ -10,6 +10,7 @@ const Adv = mongoose.model('Adv');
 
 module.exports.create = (data) => {
 	let adv = new Adv({
+		name: data.name,
 		title: data.title,
 		body: data.body,
 		icon: data.icon,
@@ -32,12 +33,12 @@ module.exports.create = (data) => {
 module.exports.get = (settings) => {
 	switch(settings.action){
 		case 'empty': {
-			return Advs.find({});
+			return Advs.find({}, {}, { sort: { 'createdAt' : -1 } });	// newest
 			break;
 		};
 		case 'params': {
 			let data = settings.data;
-			return Advs.find(data);
+			return Advs.findOne(data);
 			break;
 		};
 		default: {

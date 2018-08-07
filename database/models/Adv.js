@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AdvSchema = new Schema({
+	name: { type: String },
 	title: { type: String },
 	body: { type: String },
 	icon: { type: String },

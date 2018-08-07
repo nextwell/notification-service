@@ -34,7 +34,8 @@ module.exports = (app, db) => {
 				query.lang = formData.langs; 
 			}
 			let adv_id = 'none';
-  		    await db.Adv.create({ 
+  		    await db.Adv.create({
+  		    	name: formData.name, 
 		    	title: formData.title, 
 		    	body: formData.body,
 		    	icon: formData.iconsrc,
