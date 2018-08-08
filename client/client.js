@@ -16,7 +16,10 @@ fetch('/api/publickey')
 
         // Check for service worker
         if ("serviceWorker" in navigator) {
-          send().catch(err => console.error(err));
+          send().catch(err => { 
+            console.error(err);
+            //location.reload();
+          });
         }
 
         // Register SW, Register Push, Send Push
@@ -34,6 +37,7 @@ fetch('/api/publickey')
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
           });
+          console.log(subscription);
           console.log("Push Registered...");
 
           var dataSub = {

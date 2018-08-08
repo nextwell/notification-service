@@ -4,7 +4,6 @@
 module.exports = (app, db) => {
 	app.get("/api/views/add/:id", (req, res) => {
 		let id = req.params.id
-		console.log(id);
 		let settings = {
 			action: 'view',
 			data: {
@@ -18,7 +17,6 @@ module.exports = (app, db) => {
 
 	app.get("/api/clicks/add/:id", (req, res) => {
 		let id = req.params.id
-		console.log(id);
 		let settings = {
 			action: 'click',
 			data: {

@@ -10,7 +10,6 @@ module.exports = (app, db) => {
 			}
 			db.Adv.get({action: 'params', data: query})
 				.then(data => {
-					console.log(data);
 					if ( data.country == 'all' ) data.country = "Все";
 					if ( data.lang == 'all' ) data.lang = "Все";
 					res.render('adv-page', {adv: data})

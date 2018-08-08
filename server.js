@@ -4,7 +4,8 @@ let express    = require("express"),
 	path 	   = require("path"),
     requireFu  = require('require-fu'),
     pug 	   = require('pug'),
-    session    = require('express-session');
+    session    = require('express-session'),
+    fileUpload = require('express-fileupload');
 
 
 
@@ -39,6 +40,8 @@ let sessionMiddleware = session({
     resave: true,
     saveUninitialized: true
 });
+
+app.use(fileUpload());
 
 app.use(sessionMiddleware);
 

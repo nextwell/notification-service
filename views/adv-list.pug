@@ -14,6 +14,9 @@
 </head>
 <body>
 	<div class="container main">
+		<div class="container">
+			<a href="/adm/panel">Добавить новую</a>
+		</div>
 		<div class="container header_n no-padding">
 			<hr>
 		</div>
@@ -25,6 +28,7 @@
 						<tr>
 							<th scope="col">Дата</th>
 							<th scope="col">Название</th>
+							<th scope="col">Страна</th>
 							<th scope="col">Просмотры</th>
 							<th scope="col">Клики</th>
 							<th scope="col">Функции</th>
@@ -35,6 +39,7 @@
 							<tr>
 								<th scope="row">#{adv.createdAt.toISOString().substr(0, 19).replace('T', ' ')}</th>
 								<td>#{adv.name}</td>
+								<td>#{adv.country}</td>
 								<td>#{adv.views} views</td>
 								<td>#{adv.clicks} clicks</td>
 								<td><a href="/adm/adv/#{adv.id}" target="_blank">Подробнее</a></td>

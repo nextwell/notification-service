@@ -4,17 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Notification Service</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="/css/login.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="/js/aadm.js"></script>
 </head>
 <body>
 	<div class="container main">
+		<div class="container">
+			<a href="/adm/adv/list">Список всех компаний</a>
+		</div>
 		<div class="container header_n no-padding">
 			<hr>
 		</div>
@@ -23,37 +25,43 @@
 			<div class="container">
 				<p class="centered-text">Пользователей в системе: <b>#{nUsers}</b></p>
 				if status
-							<p class="centered success"> Отправлено! <p>
+							<p class="centered success"> Отправлено! <a href="/adm/adv/#{advId}" target="_blank">Статистика</a> <p>
 				if postbackStatus
 							<p class="centered success"> Настройка постбэка сохранена! <p>
 			</div>
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-8">
-						<form method="POST" style="margin-bottom: 20px;">
+						<form method="POST" enctype="multipart/form-data" style="margin-bottom: 20px;">
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="email">Название рекламной компании</label>
-								<input name="name" type="text" class="form-control" id="email" placeholder="Название рекламной компании" autofocus>
+								<input name="name" type="text" class="form-control" id="email" placeholder="Название рекламной компании" autofocus required>
 							</div>
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="email">Заголовок уведомления</label>
-								<input name="title" type="text" class="form-control" id="email" placeholder="Заголовок уведомления" autofocus>
+								<input name="title" type="text" class="form-control" id="email" placeholder="Заголовок уведомления" autofocus required>
 							</div>
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="password">Содержание уведомления</label>
-								<input name="body" type="text" class="form-control" id="password" placeholder="Содержание уведомления" autofocus>
+								<input name="body" type="text" class="form-control" id="password" placeholder="Содержание уведомления" autofocus required>
 							</div>
 							<div class="form-group centered-text">
-								<label class="form-control-label" for="password">Ссылка на иконку</label>
-								<input name="iconsrc" type="text" class="form-control" id="password" placeholder="Ссылка на иконку" autofocus>
+								<label class="form-control-label" for="password">Иконка</label>
+								<label class="custom-file">
+									<input type="file" id="icon" name="icon" class="custom-file-input" required>
+									<span class="custom-file-control">Выберите файл</span> 
+								</label>
 							</div>
 							<div class="form-group centered-text">
-								<label class="form-control-label" for="password">Ссылка на картинку</label>
-								<input name="imgsrc" type="text" class="form-control" id="password" placeholder="Ссылка на картинку" autofocus>
+								<label class="form-control-label" for="password">Картинка</label>
+								<label class="custom-file">
+									<input type="file" id="image" name="image" class="custom-file-input" required>
+									<span class="custom-file-control">Выберите файл</span>
+								</label>
 							</div>
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="password">Ссылка на оффер</label>
-								<input name="offer" type="text" class="form-control" id="password" placeholder="https://google.com/?click_id={{click_id}}" autofocus>
+								<input name="offer" type="text" class="form-control" id="password" placeholder="https://google.com/?click_id={{click_id}}" autofocus required>
 								<small class="form-text text-muted">Токен может быть любым, {{click_id}} заменяется автоматически на нужное значение.</small>
 							</div>
 							<div class="form-group centered-text">
