@@ -28,7 +28,53 @@ $(document).ready(function(){
 	})
 
 	$('.custom-file-input').on('change', function() { 
-	    let fileName = $(this).val().split('\\').pop(); 
-	    $(this).next('.custom-file-control').addClass("selected").html(fileName); 
+		var inp = this;
+		var _URL = window.URL;
+		let file = this.files[0];
+	    
+	    img = new Image();
+	    img.onload = function () {
+	    	console.log($(inp).attr('id'))
+	    	if ( $(inp).attr('id') == 'icon' ){
+	    		if ( this.width != 192 || this.height != 192 ){
+	    			console.log('icon error');
+	    			$(inp).next('.custom-file-control').addClass("selected").html("Неверный размер");
+	    			$(inp).val('');
+	    		}
+	    		else {
+		    		let fileName = $(inp).val().split('\\').pop(); 
+		   			$(inp).next('.custom-file-control').addClass("selected").html(fileName); 
+		    	}
+	    	}
+	   
+
+	    	if ( $(inp).attr('id') == 'image' ){
+	    		if ( this.width != 492 || this.height != 328 ){
+	    			console.log('image error');
+	    			$(inp).next('.custom-file-control').addClass("selected").html("Неверный размер");
+	    			$(inp).val('');
+	    		}
+	    		else {
+		    		let fileName = $(inp).val().split('\\').pop(); 
+		   			$(inp).next('.custom-file-control').addClass("selected").html(fileName); 
+		    	}
+	    	}
+
+        };
+        img.src = _URL.createObjectURL(file);
 	});
+
+	 var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+
+        }
+        form.classList.add('was-validated');
+      }, false);
+  })
+
 })
