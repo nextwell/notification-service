@@ -85,6 +85,31 @@ fetch('/api/publickey')
             
            
             })
+            .catch(err => {
+              console.error(err);
+              var host =  window.location.host.split('.');
+              var newURL = '';
+              var oldURL = window.location.origin;
+              console.log(oldURL);
+              if ( host[2] == 'com' ){
+                  
+
+                  newURL = oldURL.replace(host[0], getCookie('sub'));
+
+                  newURL = newURL.replace('www.', '')
+                  newURL = newURL + window.location.pathname;
+                  console.log(newURL);
+                  window.location = newURL;
+              }
+              else {
+                  // subdomain null
+                  
+                  newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
+                  newURL = newURL + window.location.pathname;
+                  window.location = newURL;
+                  console.log(newURL);
+              }
+            })
           
         }
 
