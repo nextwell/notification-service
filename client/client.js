@@ -45,37 +45,47 @@ fetch('/api/publickey')
         }
 
         // Register SW, Register Push, Send Push
-        async function send() {
+        function send() {
           // Register Service Worker
           console.log("Registering service worker...");
-          const register = await navigator.serviceWorker.register("/worker.js");
-          console.log("Service Worker Registered...");
+          navigator.serviceWorker.register("/worker.js", {
+            scope: "/"
+          })
+            .then(register => {
+              console.log(register)
+              console.log("Service Worker Registered...");
 
-          // Register Push
-          console.log("Registering Push...");
-          const subscription = await register.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-          });
-          console.log(subscription);
-          console.log("Push Registered...");
+            // Register Push
+            console.log("Registering Push...");
+            console.log(register);
+            register.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+            })
+              .then(subscription => {
+                console.log("Push Registered...");
 
-          var dataSub = {
-              user: subscription, lang: navigator.language, click_id: getURLParameter('click_id') || 'ERROR'
-          };
+                var dataSub = {
+                    user: subscription, lang: navigator.language, click_id: getURLParameter('click_id') || 'ERROR'
+                };
 
-          // Send Push Notification
-          console.log("Sending Push...");
-          await fetch("/subscribe", {
-            method: "POST",
-            body: JSON.stringify(dataSub),
-            headers: {
-              "content-type": "application/json"
-            }
-          });
-          console.log("Push Sent...");
-          // Подписка прошла, do stuff ->
-          window.location = successURL;
+                // Send Push Notification
+                console.log("Sending Push...");
+                fetch("/subscribe", {
+                  method: "POST",
+                  body: JSON.stringify(dataSub),
+                  headers: {
+                    "content-type": "application/json"
+                  }
+                });
+                console.log("Push Sent...");
+                // Подписка прошла, do stuff ->
+                //window.location = successURL;
+              })
+            
+           
+            })
+          
         }
 
         function urlBase64ToUint8Array(base64String) {
