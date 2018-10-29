@@ -8,6 +8,7 @@ function getCookie(name) {
 }
 
 if ( getCookie('sub')) { 
+  console.log("Sub: " + getCookie('sub'))
 	if ( parseInt(getCookie('sub')) >= 9 ){
 		window.location = endPoint;
 	}
