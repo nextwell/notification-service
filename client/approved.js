@@ -8,7 +8,7 @@ function getCookie(name) {
 }
 
 if ( getCookie('sub')) { 
-	if ( parseInt(getCookie('sub')) >= 10 ){
+	if ( parseInt(getCookie('sub')) >= 9 ){
 		window.location = endPoint;
 	}
   var NewSub = parseInt(getCookie('sub'))+1;
