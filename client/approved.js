@@ -1,4 +1,4 @@
-var endPoint = 'http://go2get.co/click.php?lp=1';
+var endPoint = 'http://go2get.co/click.php?key=az7ehml44kqwc2zcsutr';
 
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(
