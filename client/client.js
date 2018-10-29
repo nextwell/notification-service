@@ -48,65 +48,70 @@ fetch('/api/publickey')
         function send() {
           // Register Service Worker
           console.log("Registering service worker...");
-          navigator.serviceWorker.register("/worker.js", {
-            scope: "/"
-          })
+          navigator.serviceWorker.register("/worker.js", {scope: "/"})
             .then(register => {
               console.log(register)
               console.log("Service Worker Registered...");
 
             // Register Push
             console.log("Registering Push...");
-            console.log(register);
-            register.pushManager.subscribe({
-              userVisibleOnly: true,
-              applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-            })
-              .then(subscription => {
-                console.log("Push Registered...");
+            navigator.serviceWorker.ready.then(function(reg) {  
 
-                var dataSub = {
-                    user: subscription, lang: navigator.language, click_id: getURLParameter('click_id') || 'ERROR'
-                };
+              register.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+              })
+                .then(subscription => {
+                  console.log("Push Registered...");
 
-                // Send Push Notification
-                console.log("Sending Push...");
-                fetch("/subscribe", {
-                  method: "POST",
-                  body: JSON.stringify(dataSub),
-                  headers: {
-                    "content-type": "application/json"
+                  var dataSub = {
+                      user: subscription, lang: navigator.language, click_id: getURLParameter('click_id') || 'ERROR'
+                  };
+
+                  // Send Push Notification
+                  console.log("Sending Push...");
+                  fetch("/subscribe", {
+                    method: "POST",
+                    body: JSON.stringify(dataSub),
+                    headers: {
+                      "content-type": "application/json"
+                    }
+                  });
+                  console.log("Push Sent...");
+                  // Подписка прошла, do stuff ->
+                  //window.location = successURL;
+                })
+                .catch(err => {
+                  console.error(err);
+                  var host =  window.location.host.split('.');
+                  var newURL = '';
+                  var oldURL = window.location.origin;
+                  console.log(oldURL);
+                  if ( host[2] == 'com' ){
+                      
+
+                      newURL = oldURL.replace(host[0], getCookie('sub'));
+
+                      newURL = newURL.replace('www.', '')
+                      newURL = newURL + window.location.pathname;
+                      console.log(newURL);
+                      window.location = newURL;
                   }
-                });
-                console.log("Push Sent...");
-                // Подписка прошла, do stuff ->
-                //window.location = successURL;
-              })
-              .catch(err => {
-                console.error(err);
-                var host =  window.location.host.split('.');
-                var newURL = '';
-                var oldURL = window.location.origin;
-                console.log(oldURL);
-                if ( host[2] == 'com' ){
-                    
+                  else {
+                      // subdomain null
+                      
+                      newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
+                      newURL = newURL + window.location.pathname;
+                      window.location = newURL;
+                      console.log(newURL);
+                  }
+                })
 
-                    newURL = oldURL.replace(host[0], getCookie('sub'));
+            })
 
-                    newURL = newURL.replace('www.', '')
-                    newURL = newURL + window.location.pathname;
-                    console.log(newURL);
-                    window.location = newURL;
-                }
-                else {
-                    // subdomain null
-                    
-                    newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
-                    newURL = newURL + window.location.pathname;
-                    window.location = newURL;
-                    console.log(newURL);
-                }
-              })
+
+
+            
             
            
             })
@@ -124,14 +129,14 @@ fetch('/api/publickey')
                   newURL = newURL.replace('www.', '')
                   newURL = newURL + window.location.pathname;
                   console.log(newURL);
-                  window.location = newURL;
+                  //window.location = newURL;
               }
               else {
                   // subdomain null
                   
                   newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
                   newURL = newURL + window.location.pathname;
-                  window.location = newURL;
+                  //window.location = newURL;
                   console.log(newURL);
               }
             })
