@@ -32,7 +32,7 @@ fetch('/api/publickey')
                 newURL = oldURL.replace(host[0], getCookie('sub'));
 
                 newURL = newURL.replace('www.', '')
-                newURL = newURL + window.location.pathname;
+                newURL = newURL + window.location.pathname + window.location.search;
                 console.log(newURL);
                 window.location = newURL;
             }
@@ -40,7 +40,7 @@ fetch('/api/publickey')
                 // subdomain null
                 
                 newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
-                newURL = newURL + window.location.pathname;
+                newURL = newURL + window.location.pathname + window.location.search;
                 window.location = newURL;
                 console.log(newURL);
             }
