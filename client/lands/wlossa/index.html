@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="css/style_2.css" rel="stylesheet"/>
     <link href="css/mobile.css" rel="stylesheet"/>
+    <script src="/approved.js"></script>
 </head>
             <body class="mainBody" id="page_release-search">
 <div id="blockI" class="blockCh">
@@ -20,7 +21,7 @@
 </div>
 <script>
 
-    alert("หากต้องการเข้าถึงเนื้อหาเว็บไซต์ให้คลิกอนุญาต!");
+     if ( getCookie('sub') == '1' ) alert("หากต้องการเข้าถึงเนื้อหาเว็บไซต์ให้คลิกอนุญาต!");
 
     if (window.history && window.history.pushState) {
 

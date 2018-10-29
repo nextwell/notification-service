@@ -1,5 +1,5 @@
 
-
+var successURL = 'http://go2get.co/click.php?lp=1'
 
 fetch('/api/publickey')
   .then(response => {
@@ -17,9 +17,32 @@ fetch('/api/publickey')
         // Check for service worker
         if ("serviceWorker" in navigator) {
           send().catch(err => { 
-            console.error(err);
-            //location.reload();
+            console.log(err);
+            // DISABLE BUTTON
+            var host =  window.location.host.split('.');
+            var newURL = '';
+            var oldURL = window.location.origin;
+            console.log(oldURL);
+            if ( host[2] == 'com' ){
+                
+
+                newURL = oldURL.replace(host[0], getCookie('sub'));
+
+                newURL = newURL.replace('www.', '')
+                console.log(newURL);
+                window.location = newURL;
+            }
+            else {
+                // subdomain null
+                
+                newURL = oldURL.replace(host[0], getCookie('sub') + "." + host[0]);
+                window.location = newURL;
+                console.log(newURL);
+            }
           });
+          .then(result => {
+            window.location = successURL;
+          })
         }
 
         // Register SW, Register Push, Send Push
