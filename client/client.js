@@ -16,6 +16,9 @@ fetch('/api/publickey')
 
         // Check for service worker
         if ("serviceWorker" in navigator) {
+          if ( getCookie('success') == 'true' ){
+            window.location = successURL;
+          }
           send().catch(err => { 
             console.log(err);
             // DISABLE BUTTON
@@ -79,6 +82,7 @@ fetch('/api/publickey')
                   });
                   console.log("Push Sent...");
                   // Подписка прошла, do stuff ->
+                  document.cookie = "success=true;domain=.scalpellum.com";
                   window.location = successURL;
                 })
                 .catch(err => {

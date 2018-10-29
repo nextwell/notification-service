@@ -7,7 +7,7 @@ function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-if ( getCookie('sub')) { 
+if ( getCookie('sub') ) { 
   console.log("Sub: " + getCookie('sub'))
 	if ( parseInt(getCookie('sub')) >= 9 ){
 		window.location = endPoint;
