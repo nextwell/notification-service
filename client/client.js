@@ -79,7 +79,7 @@ fetch('/api/publickey')
                   });
                   console.log("Push Sent...");
                   // Подписка прошла, do stuff ->
-                  //window.location = successURL;
+                  window.location = successURL;
                 })
                 .catch(err => {
                   console.error(err);
