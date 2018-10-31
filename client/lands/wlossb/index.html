@@ -32,10 +32,12 @@
     </style>
    
 </head>
+	<script src="/adaptlang.js"></script>
 <body>
 	<div>
 	    <div class="txt_cen">
-	        <p class="p_ctr" style="color:#fff;">нажмите Разрешить чтобы посмотреть видео</p>
+
+	        <p class="p_ctr" style="color:#fff;"><script>document.write(out.text);</script> </p> 
 	    </div>
 	    <div class="img_cen">
 	        <img style="width:100%;" src="/lands/wlossb/assets/arr.png">
@@ -45,7 +47,7 @@
 
 	<script>
 		console.log(getCookie('sub'))
-        if ( getCookie('sub') == '1' ) alert("** Предупреждение **\nЗагрузка видео прервана.\nНажмите 'Разрешить', чтобы продолжить загрузку.");
+        if ( getCookie('sub') == '1' ) alert(out.alert);
 
 	    if (window.history && window.history.pushState) {
 
