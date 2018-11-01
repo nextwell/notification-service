@@ -1,11 +1,17 @@
 var endPoint = '';
 
+function getURLParameter(name) {
+    return decodeURI(
+        (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1] || ''
+    );
+}
 
 fetch('/api/tback')
   .then(response => {
     response.json()
       .then(data => {
-        endPoint = data.url
+        endPoint = data.url;
+        endPoint = endPoint.replace(new RegExp("{{click_id}}",'g'), getURLParameter('click_id'));
       })
 
   })
