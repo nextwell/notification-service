@@ -1,4 +1,17 @@
-var endPoint = 'http://go2get.co/click.php?key=az7ehml44kqwc2zcsutr';
+var endPoint = '';
+
+
+fetch('/api/tback')
+  .then(response => {
+    response.json()
+      .then(data => {
+        endPoint = data.url
+      })
+
+  })
+
+
+//var endPoint = 'http://go2get.co/click.php?key=az7ehml44kqwc2zcsutr';
 
 function getCookie(name) {
     var matches = document.cookie.match(new RegExp(

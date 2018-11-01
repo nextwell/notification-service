@@ -48,7 +48,7 @@ module.exports = (app, db) => {
 				.then(data => {
 					let fileContents = fs.readFileSync('settings.json','utf8');
 					let config = JSON.parse(fileContents);
-					res.render('adm', { nUsers: data.length, postback: config.POSTBACK });
+					res.render('adm', { nUsers: data.length, postback: config.POSTBACK, traffback: config.TRAFFBACK });
 				})
 		}
 		else {
