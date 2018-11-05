@@ -1,6 +1,7 @@
 let mongoose = require('mongoose'),
 	users 	 = require('./UsersUtils.js'),
 	adv      = require('./AdvUtils.js');
+	carousel = require('./CarouselUtils.js');
 
 mongoose.Promise = global.Promise;
 
@@ -11,3 +12,5 @@ module.exports.setUpConnection = () => {
 module.exports.Users = users;
 
 module.exports.Adv = adv;
+
+module.exports.Carousel = carousel;

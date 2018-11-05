@@ -71,3 +71,31 @@ requireFu(__dirname + '/routes')(app, db);
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
 
+
+//----------------------------------------------------------------------------------------
+// Caurosel stuff
+
+let CarouselControl = require('./modules/CarouselControl.js').CarouselControl;
+/*let Carousel = new CarouselControl({db: db});
+Carousel.add({name: "NAME", title: "TITLE", advs: ['0', '1', '2', '3'], timer: 5})*/
+
+let loadCarousels = require('./modules/CarouselControl.js').loadCarousels;
+let CarouselsDATA = null;
+let Carousels = [];
+
+(async() => {
+    
+
+    CarouselsDATA = await loadCarousels(db);
+
+
+    //console.log(CarouselsDATA)
+
+    CarouselsDATA.forEach(function(item, i, array){
+        Carousels.push(new CarouselControl({db: db, object: item}))
+    })
+    console.log(Carousels)
+ })();
+
+
+
