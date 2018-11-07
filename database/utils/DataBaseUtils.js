@@ -6,7 +6,11 @@ let mongoose = require('mongoose'),
 mongoose.Promise = global.Promise;
 
 module.exports.setUpConnection = () => {
-	mongoose.connect(`mongodb://localhost:27017/notifications`, { useNewUrlParser: true });
+	let url = `mongodb://localhost:27017/notifications`;
+	if ( process.env.dev == 'true' ){
+		url = `mongodb://localhost:27017/notificationsdev`;
+	}
+	mongoose.connect(url, { useNewUrlParser: true });
 }
 
 module.exports.Users = users;

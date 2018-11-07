@@ -1,7 +1,7 @@
 module.exports = (app, db) => {
 	let admin = {
-		login: process.env.login || 'adm',
-		password: process.env.password || 'admpanel'
+		login: process.env.login || 'admin',
+		password: process.env.password || 'admin'
 	}
 	app.get('/adm/login', (req, res) => {
 		if ( req.session.userData ){

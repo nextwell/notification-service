@@ -60,14 +60,7 @@ module.exports = (app, db) => {
 	app.post('/adm/panel', async (req, res) => {
 		if ( req.session.userData ){
 			let formData = req.body;
-			let query = {};
-			if ( formData.countries != 'all'){
-				query.countryCode = formData.countries;
-			}
-			if ( formData.langs != 'all'){
-				query.lang = formData.langs; 
-			}
-			let adv_id = 'none';
+
 			let uploadedFiles = await upload(req.files);
   		    await db.Adv.create({
   		    	name: formData.name, 
@@ -82,9 +75,16 @@ module.exports = (app, db) => {
 		   	.then(data => {
 		   		adv_id = data._id
 		   	})
+
+		   	db.Users.get({action: 'empty'})
+				.then(users => {
+					let fileContents = fs.readFileSync('settings.json','utf8');
+					let config = JSON.parse(fileContents);
+					res.render('adm', { nUsers: users.length, status: 'success', advId: adv_id, postback: config.POSTBACK, traffback: config.TRAFFBACK });
+				})
 		   	
 
-			db.Users.get({action: 'params', data: query})
+			/*db.Users.get({action: 'params', data: query})
 				.then(data => {
 					data.forEach(function(item, i, arr) {
 					  	let subscription = { 
@@ -127,7 +127,7 @@ module.exports = (app, db) => {
 						})
 					
 					
-				})
+				})*/
 		}
 		else{
 			res.redirect('/adm/login');

@@ -11,9 +11,9 @@ const Carousel = mongoose.model('Carousel');
 module.exports.create = (data) => {
 	let carousel = new Carousel({
 		name: data.name,
-		title: data.title,
 		createdAt: new Date(),
-		status: "stopped",
+		status: "active",
+		iterator: 0,
 		advs: data.advs,
 		timer: parseInt(data.timer)
 	});
@@ -49,7 +49,27 @@ module.exports.update = (settings) => {
 	*/
 
 	if ( settings.status ){
+		console.log( "Change status MONGO: " + settings.object._id + " : " + settings.status)
 		Carousel.update( settings.object,  { $set: { status: settings.status } }, (err, result) => {
+			if ( err ) console.log(err);
+			else {
+				return true;
+			}
+		});
+	}
+
+	if ( settings.iterator ){
+		Carousel.update( settings.object, { $inc: { iterator: +1 } }, { new: true },function(err, response) {
+				if (err) {
+					//console.log(err);
+				} 
+				else {
+			 		//console.log(response);
+				}
+			})
+	}
+	else if ( settings.iterator == false ){
+		Carousel.update( settings.object,  { $set: { iterator: 0 } }, (err, result) => {
 			if ( err ) console.log(err);
 			else {
 				return true;

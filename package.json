@@ -20,6 +20,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
+    "express-list-endpoints": "^4.0.0",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "mkdirp": "^0.5.1",
@@ -29,6 +30,7 @@
     "request": "^2.87.0",
     "request-ip": "^2.1.1",
     "require-fu": "^1.0.0",
+    "safe-timers": "^1.1.0",
     "web-push": "^3.3.2"
   }
 }

@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 
 const CarouselSchema = new Schema({
 	name: 	   { type: String },
-	title: 	   { type: String },
 	advs: 	   { type: Array },
 	status:    { type: String },
-	timer:   { type: Number },
+	timer:     { type: Number },
+	iterator:  { type: Number },
 	createdAt: { type: Date }
 });
 

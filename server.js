@@ -1,9 +1,9 @@
 let express    = require("express"),
-	webpush    = require("web-push"),
-	bodyParser = require("body-parser"),
-	path 	   = require("path"),
+  webpush    = require("web-push"),
+  bodyParser = require("body-parser"),
+  path     = require("path"),
     requireFu  = require('require-fu'),
-    pug 	   = require('pug'),
+    pug      = require('pug'),
     session    = require('express-session'),
     fileUpload = require('express-fileupload');
 
@@ -54,6 +54,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+const all_routes = require('express-list-endpoints');
+
+
 
 
 const requestIp = require('request-ip');
@@ -61,12 +64,17 @@ app.use(requestIp.mw())
 
 
 
-
+let Carousels = [];
 
 
 const port = 5000;
 
-requireFu(__dirname + '/routes')(app, db);
+requireFu(__dirname + '/routes')(app, db, Carousels);
+
+console.log(all_routes(app));
+
+
+
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
 
@@ -77,11 +85,10 @@ app.listen(port, () => console.log(`Server started on port ${port}`));
 
 let CarouselControl = require('./modules/CarouselControl.js').CarouselControl;
 /*let Carousel = new CarouselControl({db: db});
-Carousel.add({name: "NAME", title: "TITLE", advs: ['0', '1', '2', '3'], timer: 5})*/
+Carousel.add({name: "NAME", advs: ['0', '1', '2', '3'], timer: 1})*/
 
 let loadCarousels = require('./modules/CarouselControl.js').loadCarousels;
 let CarouselsDATA = null;
-let Carousels = [];
 
 (async() => {
     
@@ -96,6 +103,4 @@ let Carousels = [];
     })
     console.log(Carousels)
  })();
-
-
 
