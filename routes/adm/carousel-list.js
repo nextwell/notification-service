@@ -2,12 +2,12 @@
 // Adv Page
 
 
-module.exports = (app, db) => {
+module.exports = (app, db, Carousels) => {
 	app.get('/adm/carousel/list', (req, res) => {
 		if ( req.session.userData ){
-			db.Carousel.get()
-				.then(data => {
-					res.render('carousel-list', {cors: data})
+			db.Adv.get({action: 'empty'})
+				.then(async data => {
+					res.render('carousel-list', {cors: Carousels, advs: data})
 				})
 		}
 		else {

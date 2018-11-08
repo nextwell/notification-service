@@ -58,6 +58,17 @@ module.exports.update = (settings) => {
 		});
 	}
 
+	if ( settings.updateAdvs ){
+
+		Carousel.update( settings.object,  { $set: { advs: settings.advs } }, (err, result) => {
+			if ( err ) console.log(err);
+			else {
+				return true;
+			}
+		});
+		return true;
+	}
+
 	if ( settings.iterator ){
 		Carousel.update( settings.object, { $inc: { iterator: +1 } }, { new: true },function(err, response) {
 				if (err) {

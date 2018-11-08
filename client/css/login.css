@@ -116,3 +116,44 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .custom-file-control{
 	overflow: hidden !important;
 }
+
+
+.fa-drop {
+    margin-right: 7px;
+}
+
+.tr-st {
+    cursor: pointer;
+}
+.stats-tr {
+    height: 20px;
+    font-size: 12px;
+}
+
+.centered{
+	text-align: center;
+}
+
+.hiddenRow {
+    font-size: 12px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.btn-link-danger{
+	color: #c82333;;
+}
+
+.btn-link-danger:hover{
+	color: #c82333;;
+}
+
+
+.right-pos{
+	text-align: right;
+}
+
+.btn-advs-down > *{
+	font-size: 12px;
+	width: 300px;
+}

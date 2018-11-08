@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Список всех компаний</title>
+	<title>Список всех каруселей</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -24,30 +24,110 @@
 		
 		<div class="middle">
 			<div class="container">
-				<table class="table">
+				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th scope="col">Дата</th>
 							<th scope="col">Название</th>
+							<th scope="col">Дата</th>
 							<th scope="col">Интервал</th>
+							<th scope="col">Просмотров</th>
+							<th scope="col">Кликов</th>
 							<th scope="col">Функции</th>
 						</tr>
 					</thead>
 					<tbody>
 						each item in cors
-							<tr>
-								<th scope="row">#{item.createdAt.toISOString().substr(0, 19).replace('T', ' ')}</th>
-								<td>#{item.name}</td>
-								<td>#{item.timer} минут</td>
-								- if(item.status == 'active') {
-								| <td><button class="btn btn-sm btn-danger change-status" data-status="stopped" data-id="#{item._id}">Stop</button></td>
+							<tr class="tr-st dop-st stats-tr collapsed" data-toggle="collapse" data-target=".land-stats-#{item.object._id}" aria-expanded="false">
+								
+								<th scope="row"><i class="fa fa-drop fa-chevron-down" aria-hidden="true"></i>#{item.object.name}</th>
+								<th class="dop-st">#{item.object.createdAt.toISOString().substr(0, 19).replace('T', ' ')}</th>
+								<th>#{item.object.timer} минут</th>
+								<th>#{item.stats.totalViews} просмотров</th>
+								<th>#{item.stats.totalClicks} кликов</th>
+
+
+								- if(item.object.status == 'active') {
+								| <th><button class="btn btn-sm btn-danger change-status" data-status="stopped" data-id="#{item.object._id}">Остановить</button></th>
 								- }
-								- if(item.status == 'stopped') {
-								| <td><button class="btn btn-sm btn-success change-status" data-status="active" data-id="#{item._id}">Activate</button></td>
+								- if(item.object.status == 'stopped') {
+								| <th><button class="btn btn-sm btn-success change-status" data-status="active" data-id="#{item.object._id}">Запустить</button></th>
 								- }
 							</tr>
+							each adv in item.stats.advs
+								<tr class="dop-tr-stats">
+									<th class="hiddenRow">
+										<div class="dop-stats-text centered land-stats-#{item.object._id} collapse" style="">#{adv.name}</div>
+									</th>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">-</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">-</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">#{adv.views} просмотров</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">#{adv.clicks} кликов</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">
+											<button class="btn btn-sm btn-link btn-link-danger remove-adv" data-cor-id="#{item.object._id}" data-adv-id="#{adv._id}">Удалить</button>
+										</div>
+									</td>
+								</tr>
+							<tr class="dop-tr-stats">
+								<form action="/adm/api/carousel/add-adv" method="POST">
+									<th class="hiddenRow" colspan="5">
+										<input type="hidden" value="#{item.object._id}" name="carousel_id">
+										<div class="dop-stats-text centered land-stats-#{item.object._id} collapse" style="">
+											<div class="btn-group btn-advs-down">
+												<button type="button" name="adv_id" class="btn btn-secondary btn-sm dropdown-toggle" required data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выберите рекламу</button>
+												<input type="hidden" required name="adv_id">
+												<div class="dropdown-menu">
+													each adv in advs
+														<a class="dropdown-item" href="#" data-id="#{adv._id}">#{adv.name}</a>
+												</div>
+											</div>
+										</div>
+									</th>
+
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">
+											<button class="btn btn-sm btn-link btn-link-success add-adv" type="submit">Добавить</button>
+										</div>
+									</td>
+								</form>
+									
+							</tr>
 					</tbody>
-					</table>
+				</table>
+					<!-- <table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Дата</th>
+								<th scope="col">Название</th>
+								<th scope="col">Интервал</th>
+								<th scope="col">Функции</th>
+							</tr>
+						</thead>
+							<tbody>
+								<tr class="tr-st stats-tr collapsed" data-toggle="collapse" data-target=".land-stats-0" aria-expanded="false">
+									<th class="dop-st"><i class="fa fa-drop fa-chevron-down" aria-hidden="true"></i>Anorexia-PL | ID: 0</th>
+									<th>0</th>
+									<th>0$</th>
+								</tr>
+								<tr class="dop-tr-stats">
+									<th class="hiddenRow">
+										<div class="dop-stats-text centered land-stats-0 collapse" style="">Choco Lite | ID: 0</div>
+									</th>
+									<td class="hiddenRow">
+										<div class="land-stats-0 collapse" style="">0</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-0 collapse" style="">0$</div>
+									</td>
+								</tr></tbody></table> -->
 			</div>
 		</div>
 

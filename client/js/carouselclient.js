@@ -1,4 +1,17 @@
 $(document).ready(function(){
+
+	$('.dop-st').click(function(){
+		if ( $(this).find('i').hasClass("fa-chevron-down")){
+			 $(this).find('i').removeClass('fa-chevron-down');
+			 $(this).find('i').addClass('fa-chevron-up');
+		}
+		else{
+			 $(this).find('i').removeClass('fa-chevron-up');
+			 $(this).find('i').addClass('fa-chevron-down');
+		}
+    })
+
+	
 	$('select option').on('mousedown', function (e) {
 	    this.selected = !this.selected;
 	    e.preventDefault();
@@ -18,13 +31,13 @@ $(document).ready(function(){
 			case 'active': { 
 				newBTN.dataStatus = 'stopped'; 
 				$(this).removeClass('btn-success').addClass('btn-danger'); 
-				$(this).text("Stop"); 
+				$(this).text("Остановить"); 
 				break; 
 			};
 			case 'stopped': { 
 				newBTN.dataStatus = 'active'; 
 				$(this).removeClass('btn-danger').addClass('btn-success');  
-				$(this).text("Activate"); 
+				$(this).text("Запустить"); 
 				break; 
 			};
 		}
@@ -38,4 +51,32 @@ $(document).ready(function(){
 		})
 
 	})
+
+
+
+	$('.remove-adv').click(function(){
+		
+		// view remove
+		let th = $(this).parent().parent().parent();
+		$(th).remove()
+
+		// server side remove
+
+		let data = {
+			carousel_id: $(this).attr('data-cor-id'),
+			adv_id: $(this).attr('data-adv-id')
+		}
+		console.log(data);
+
+		$.get(`/adm/api/carousel/remove/${data.carousel_id}/${data.adv_id}`, function(data, status) {
+			console.log(data);
+		})
+
+	})
+
+	$(".dropdown-menu a").click(function(){
+		var mainBtn = $(this).parent().parent().children().first();
+      	$(mainBtn).text($(this).text());					// name
+      	$(mainBtn).next().val($(this).attr('data-id'));			// id
+    });
 })

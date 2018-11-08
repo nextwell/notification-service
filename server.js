@@ -100,7 +100,10 @@ let CarouselsDATA = null;
 
     CarouselsDATA.forEach(function(item, i, array){
         Carousels.push(new CarouselControl({db: db, object: item}))
+        Carousels[i].mathStats();
     })
-    console.log(Carousels)
+
+    
+    //console.log(Carousels)
  })();
 
