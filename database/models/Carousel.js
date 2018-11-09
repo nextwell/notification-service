@@ -8,6 +8,8 @@ const CarouselSchema = new Schema({
 	status:    { type: String },
 	timer:     { type: Number },
 	iterator:  { type: Number },
+	prev:  	   { type: String },
+	next:      { type: String },
 	createdAt: { type: Date }
 });
 

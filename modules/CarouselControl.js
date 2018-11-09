@@ -1,5 +1,28 @@
 let setInterval = require('safe-timers').setInterval,
-	webpush     = require("web-push");
+	webpush     = require("web-push"),
+	moment 		= require('moment-timezone');
+
+
+var timezone = 'Europe/Moscow';
+
+
+
+function compareTime(str1, str2){
+    if(str1 === str2){
+        return 0;
+    }
+    var time1 = str1.split(':');
+    var time2 = str2.split(':');
+    if(eval(time1[0]) > eval(time2[0])){
+        return 1;
+    } else if(eval(time1[0]) == eval(time2[0]) && eval(time1[1]) > eval(time2[1])) {
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+
 
 
 async function loadCarousels(db){
@@ -25,6 +48,8 @@ class CarouselControl{
 		this.interval = null;
 		this.db = data.db;
 		this.object = null;
+		this.prev = null;	// после 10:00
+		this.next = null;	// перед 24:00
 		this.timeValue = null;
 		this.stats = {
 			totalViews: 0,
@@ -35,7 +60,8 @@ class CarouselControl{
 			this.object = data.object;
 			this.timeValue = data.object.timer * 60 * 1000;
 			if ( data.object.status == 'active' ) this.startTimer();
-			
+			this.prev = data.object.prev;
+			this.next = data.object.next;
 		}
 
 	}
@@ -44,10 +70,14 @@ class CarouselControl{
 		 this.db.Carousel.create({ 
 		 		name: data.name,  
 		    	advs: data.advs,
-		    	timer: data.timer
+		    	timer: data.timer,
+		    	prev: data.prev,
+		    	next: data.next
 		    })
 	  	    .then( data => {
 	  		    this.object = data;
+	  		    this.prev = data.prev;
+	  		    this.next = data.next;
 	  		    this.timeValue = data.timer * 60 * 1000;
 	  		    if ( data.status == 'active' ) this.startTimer();
 				
@@ -58,7 +88,14 @@ class CarouselControl{
 	}
 
 	async sendPush(){
-		//console.log(this.object);
+		var now = moment().utc();
+		if ( 
+			( compareTime(this.prev, now.tz(timezone).format('HH:mm').toString()) == -1 ) 
+										&&
+			( compareTime(this.next, now.tz(timezone).format('HH:mm').toString()) == 1 )
+		){
+
+
 			if ( !this.object.advs[this.object.iterator] ) {
 				this.db.Carousel.update({object: this.object, iterator: false})
 			    this.object.iterator = 0;
@@ -121,8 +158,12 @@ class CarouselControl{
 			    this.db.Carousel.update({object: this.object, iterator: false})
 			    this.object.iterator = 0;
 			}
-			this.mathStats();
-	
+			
+		}
+		else console.log("SKIP Carousel_ID: " + this.object._id);
+
+		this.mathStats();
+
 	}
 
 	startTimer(){
@@ -144,6 +185,9 @@ class CarouselControl{
 	}
 
 	async mathStats(){
+
+		
+
 		this.stats.totalViews = 0;
 		this.stats.totalClicks = 0;
 		this.stats.advs = [];
@@ -155,6 +199,7 @@ class CarouselControl{
 					this.stats.advs.push(adv);
 				})
 		})
+
 	}
 
 	removeAdv(id){

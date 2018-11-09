@@ -157,3 +157,8 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 	font-size: 12px;
 	width: 300px;
 }
+
+.dropdown-menu-adv{
+	overflow-y: auto;
+	max-height: 150px;
+}

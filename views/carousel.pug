@@ -16,7 +16,7 @@
 	<div class="container main">
 		<div class="container">	
 			if status
-				<p class="centered success"> Добавлено! <a href="/adm/carousel/#{carId}" target="_blank">Перейти в карусель</a> <p>
+				<p class="centered success"> Добавлено! <p>
 		</div>
 		<div class="container header_n no-padding">
 			<hr>
@@ -35,6 +35,16 @@
 								<label class="form-control-label" for="email">Интервал в минутах</label>
 								<input name="interval" type="text" class="form-control" id="email" placeholder="Интервал" autofocus required>
 								<small class="form-text text-muted">К примеру 1</small>
+							</div>
+							<div class="form-group centered-text">
+								<label class="form-control-label" for="email">Отправлять рекламу после</label>
+								<input name="prev" type="text" class="form-control" id="email" placeholder="После" autofocus required>
+								<small class="form-text text-muted">К примеру 10:00 (по MSK)</small>
+							</div>
+							<div class="form-group centered-text">
+								<label class="form-control-label" for="email">Отправлять рекламу до</label>
+								<input name="next" type="text" class="form-control" id="email" placeholder="До" autofocus required>
+								<small class="form-text text-muted">К примеру 24:00 (по MSK)</small>
 							</div>
 							<div class="form-group centered-text">
 								<label for="exampleFormControlSelect1">Выберите рекламу</label>

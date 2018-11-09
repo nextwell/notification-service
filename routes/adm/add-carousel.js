@@ -24,7 +24,7 @@ module.exports = (app, db, Carousels) => {
 			let formData = req.body;
 			console.log(formData);
 			let Carousel = new CarouselControl({db: db});
-			Carousel.add({name: formData.name, advs: formData.advs, timer: formData.interval})
+			Carousel.add({name: formData.name, advs: formData.advs, timer: formData.interval, prev: formData.prev, next: formData.next})
 			Carousels.push(Carousel);
 			db.Adv.get({action: 'empty'})
 				.then(async data => {

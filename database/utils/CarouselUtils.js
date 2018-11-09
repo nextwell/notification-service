@@ -15,6 +15,8 @@ module.exports.create = (data) => {
 		status: "active",
 		iterator: 0,
 		advs: data.advs,
+		prev: data.prev,
+		next: data.next,
 		timer: parseInt(data.timer)
 	});
 	let promise = carousel.save();

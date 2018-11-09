@@ -30,6 +30,8 @@
 							<th scope="col">Название</th>
 							<th scope="col">Дата</th>
 							<th scope="col">Интервал</th>
+							<th scope="col">С</th>
+							<th scope="col">До</th>
 							<th scope="col">Просмотров</th>
 							<th scope="col">Кликов</th>
 							<th scope="col">Функции</th>
@@ -42,6 +44,8 @@
 								<th scope="row"><i class="fa fa-drop fa-chevron-down" aria-hidden="true"></i>#{item.object.name}</th>
 								<th class="dop-st">#{item.object.createdAt.toISOString().substr(0, 19).replace('T', ' ')}</th>
 								<th>#{item.object.timer} минут</th>
+								<th>#{item.object.prev}</th>
+								<th>#{item.object.next}</th>
 								<th>#{item.stats.totalViews} просмотров</th>
 								<th>#{item.stats.totalClicks} кликов</th>
 
@@ -53,11 +57,20 @@
 								| <th><button class="btn btn-sm btn-success change-status" data-status="active" data-id="#{item.object._id}">Запустить</button></th>
 								- }
 							</tr>
+							<!-- <hr>
+							<div>#{JSON.stringify(item.stats.advs)}</div>
+							<hr> -->
 							each adv in item.stats.advs
 								<tr class="dop-tr-stats">
 									<th class="hiddenRow">
 										<div class="dop-stats-text centered land-stats-#{item.object._id} collapse" style="">#{adv.name}</div>
 									</th>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">-</div>
+									</td>
+									<td class="hiddenRow">
+										<div class="land-stats-#{item.object._id} collapse" style="">-</div>
+									</td>
 									<td class="hiddenRow">
 										<div class="land-stats-#{item.object._id} collapse" style="">-</div>
 									</td>
@@ -78,13 +91,13 @@
 								</tr>
 							<tr class="dop-tr-stats">
 								<form action="/adm/api/carousel/add-adv" method="POST">
-									<th class="hiddenRow" colspan="5">
+									<th class="hiddenRow" colspan="7">
 										<input type="hidden" value="#{item.object._id}" name="carousel_id">
 										<div class="dop-stats-text centered land-stats-#{item.object._id} collapse" style="">
 											<div class="btn-group btn-advs-down">
 												<button type="button" name="adv_id" class="btn btn-secondary btn-sm dropdown-toggle" required data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Выберите рекламу</button>
 												<input type="hidden" required name="adv_id">
-												<div class="dropdown-menu">
+												<div class="dropdown-menu dropdown-menu-adv">
 													each adv in advs
 														<a class="dropdown-item" href="#" data-id="#{adv._id}">#{adv.name}</a>
 												</div>
