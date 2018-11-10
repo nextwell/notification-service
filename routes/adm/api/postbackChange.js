@@ -15,7 +15,7 @@ module.exports = (app, db) => {
 			config.POSTBACK = data.postback;
 			fs.writeFileSync('settings.json', JSON.stringify(config));
 			
-			res.redirect('/adm/panel');
+			res.redirect('/adm/settings');
 		}
 		else {
 			res.send("Page not found!");

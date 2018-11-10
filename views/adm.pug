@@ -14,21 +14,19 @@
 </head>
 <body>
 	<div class="container main">
-		<div class="container">
-			<a href="/adm/adv/list">Список всех компаний</a>
-		</div>
+		include layouts/adm-header.pug
 		<div class="container header_n no-padding">
 			<hr>
 		</div>
 		
 		<div class="middle">
-			<div class="container">
+			<!-- <div class="container">
 				<p class="centered-text">Пользователей в системе: <b>#{nUsers}</b></p>
 				if status
 							<p class="centered success"> Добавлено! <a href="/adm/adv/#{advId}" target="_blank">Статистика</a> <p>
 				if postbackStatus
 							<p class="centered success"> Настройка постбэка сохранена! <p>
-			</div>
+			</div> -->
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-8">
@@ -85,7 +83,7 @@
 								<button type="submit" class="btn btn-success">Добавить</button>
 							</div>
 						</form>
-						<form action="/adm/api/postback" method="POST">
+						<!-- <form action="/adm/api/postback" method="POST">
 							<div class="form-group centered-text">
 								<label class="form-control-label" for="email">Ссылка на postback трекера</label>
 								<input name="postback" type="text" class="form-control" placeholder="#{postback}">
@@ -104,7 +102,7 @@
 							<div class="form-group centered-text">
 								<button type="submit" class="btn btn-primary">Сохранить настройку</button>
 							</div>
-						</form>
+						</form> -->
 					</div>
 				</div>
 			</div>
