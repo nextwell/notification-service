@@ -11,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="/js/controla.js"></script>
 </head>
 <body>
 	<div class="container main">
@@ -40,7 +41,11 @@
 								<td>#{adv.country}</td>
 								<td>#{adv.views} views</td>
 								<td>#{adv.clicks} clicks</td>
-								<td><a href="/adm/adv/#{adv.id}" target="_blank">Подробнее</a></td>
+								<td>
+									<a href="/adm/adv/#{adv.id}" target="_blank">Подробнее</a>
+									<br>
+									<button class="btn-link remove-adv" data-id="#{adv._id}">Удалить</a>
+								</td>
 							</tr>
 					</tbody>
 					</table>

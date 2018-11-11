@@ -162,3 +162,8 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 	overflow-y: auto;
 	max-height: 150px;
 }
+
+
+.remove-adv{
+	color: #c82333;;
+}
