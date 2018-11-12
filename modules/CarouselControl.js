@@ -181,7 +181,7 @@ class CarouselControl{
 		console.log("Stop timer: " + this.object._id);
 		this.interval.clear();
 		this.db.Carousel.update({object: {_id: this.object._id}, status: "stopped"})
-		this.mathStats();
+		// this.mathStats();
 	}
 
 	async mathStats(){
@@ -194,9 +194,9 @@ class CarouselControl{
 		await this.object.advs.forEach(async (item, i, array) => {
 			await this.db.Adv.get({action: 'params', data: {_id: item} })
 				.then(adv => {
-					this.stats.totalViews = this.stats.totalViews + adv.views;
-					this.stats.totalClicks = this.stats.totalClicks + adv.clicks;
-					this.stats.advs.push(adv);
+					this.stats.totalViews = this.stats.totalViews + adv.views;				// errors, fix later
+					this.stats.totalClicks = this.stats.totalClicks + adv.clicks;			// errors, fix later
+					this.stats.advs.push(adv);												// errors, fix later
 				})
 		})
 

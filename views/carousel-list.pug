@@ -47,19 +47,22 @@
 								<th>#{item.stats.totalViews} просмотров</th>
 								<th>#{item.stats.totalClicks} кликов</th>
 
-
-								- if(item.object.status == 'active') {
-								| <th><button class="btn btn-sm btn-danger change-status" data-status="stopped" data-id="#{item.object._id}">Остановить</button></th>
-								- }
-								- if(item.object.status == 'stopped') {
-								| <th><button class="btn btn-sm btn-success change-status" data-status="active" data-id="#{item.object._id}">Запустить</button></th>
-								- }
+								<th>
+									- if(item.object.status == 'active') {
+									| <button class="btn btn-sm btn-danger change-status" data-status="stopped" data-id="#{item.object._id}">Остановить</button>
+									- }
+									- if(item.object.status == 'stopped') {
+									| <button class="btn btn-sm btn-success change-status" data-status="active" data-id="#{item.object._id}">Запустить</button>
+									- }
+									<br>
+									<button class="btn-link remove-carousel" data-id="#{item.object._id}">Удалить</a>
+								</th>
 							</tr>
 							<!-- <hr>
 							<div>#{JSON.stringify(item.stats.advs)}</div>
 							<hr> -->
 							each adv in item.stats.advs
-								<tr class="dop-tr-stats">
+								<tr class="dop-tr-stats" data-objectId="#{item.object._id}">
 									<th class="hiddenRow">
 										<div class="dop-stats-text centered land-stats-#{item.object._id} collapse" style="">#{adv.name}</div>
 									</th>
@@ -87,7 +90,7 @@
 										</div>
 									</td>
 								</tr>
-							<tr class="dop-tr-stats">
+							<tr class="dop-tr-stats" data-objectId="#{item.object._id}">
 								<form action="/adm/api/carousel/add-adv" method="POST">
 									<th class="hiddenRow" colspan="7">
 										<input type="hidden" value="#{item.object._id}" name="carousel_id">
@@ -113,32 +116,6 @@
 							</tr>
 					</tbody>
 				</table>
-					<!-- <table class="table table-hover">
-						<thead>
-							<tr>
-								<th scope="col">Дата</th>
-								<th scope="col">Название</th>
-								<th scope="col">Интервал</th>
-								<th scope="col">Функции</th>
-							</tr>
-						</thead>
-							<tbody>
-								<tr class="tr-st stats-tr collapsed" data-toggle="collapse" data-target=".land-stats-0" aria-expanded="false">
-									<th class="dop-st"><i class="fa fa-drop fa-chevron-down" aria-hidden="true"></i>Anorexia-PL | ID: 0</th>
-									<th>0</th>
-									<th>0$</th>
-								</tr>
-								<tr class="dop-tr-stats">
-									<th class="hiddenRow">
-										<div class="dop-stats-text centered land-stats-0 collapse" style="">Choco Lite | ID: 0</div>
-									</th>
-									<td class="hiddenRow">
-										<div class="land-stats-0 collapse" style="">0</div>
-									</td>
-									<td class="hiddenRow">
-										<div class="land-stats-0 collapse" style="">0$</div>
-									</td>
-								</tr></tbody></table> -->
 			</div>
 		</div>
 

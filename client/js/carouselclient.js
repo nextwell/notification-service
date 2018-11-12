@@ -79,4 +79,30 @@ $(document).ready(function(){
       	$(mainBtn).text($(this).text());					// name
       	$(mainBtn).next().val($(this).attr('data-id'));			// id
     });
+
+
+
+
+    $('.remove-carousel').click(function(){
+    	// Remove carousel
+    	let data = {
+    		id: $(this).attr('data-id'),
+    		tr: $(this).parent().parent() // row
+    	}
+
+    	// View remove
+
+    	$(data.tr).remove()	// remove main tr
+
+    	$(`tr[data-objectId=${data.id}]`).each(function() {
+		    $(this).remove();	// remove children
+		});
+
+    	// Server side remove
+
+		$.get(`/adm/api/carousel/remove/${data.id}`, function(data, status) {
+			console.log(data);
+		})
+
+    })
 })

@@ -165,5 +165,18 @@ input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 
 
 .remove-adv{
-	color: #c82333;;
+	color: #c82333;
+}
+
+.hiddenRow{
+	border: 0 !important;
+}
+
+.remove-carousel{
+	color: #c82333;
+	margin-left: 5px;
+}
+
+.remove-carousel:hover{
+	color: #c82333;
 }
