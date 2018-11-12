@@ -18,6 +18,16 @@ var landPack = [
 		type: 'it',
 		alert: "** Attenzione **\nCaricamento video interrotto.\nFai clic su 'Consenti' per continuare il download.",
 		text: "Fai clic su 'Consenti' per guardare il video"
+	},
+	{
+		type: 'de',
+		alert: "** Warnung **\nDer Video-Download wurde abgebrochen.\nKlicken Sie auf „Erlauben“, um den Download fortzusetzen.",
+		text: "Klicken Sie auf 'Erlauben', um das Video anzusehen"
+	},
+	{
+		type: 'fr',
+		alert: "** Avertissement **\nle téléchargement de la vidéo a été interrompu.\nAppuyez sur « Autoriser » pour continuer le téléchargement",
+		text: "Appuyez sur « Autoriser » pour regarder la vidéo"
 	}
 ]
 
